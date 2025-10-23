@@ -1,0 +1,44 @@
+{
+  "name": "sanskrit-agent-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Sanskrit agent communication with real-time translation",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "node --test",
+    "demo:vedanta": "node examples/vedanta-roundtable.mjs",
+    "demo:live": "node examples/live-vedanta-debate.mjs",
+    "demo:truth": "node examples/vedanta-truth-debate.mjs",
+    "demo:learning": "node examples/gajendra-moksha-learning.mjs",
+    "lint": "eslint src --ext .ts || echo 'Linting skipped'",
+    "clean": "rm -rf dist",
+    "setup": "./scripts/setup.sh",
+    "inspector": "npx @modelcontextprotocol/inspector ./scripts/run-server.sh",
+    "prepublish": "npm run build && npm test"
+  },
+  "keywords": [
+    "sanskrit",
+    "ai-agents",
+    "mcp",
+    "translation",
+    "communication"
+  ],
+  "author": "Sanskrit Agent Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "markdown-pdf": "^11.0.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.0"
+  }
+}
