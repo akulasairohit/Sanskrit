@@ -1,31 +1,35 @@
 #!/bin/bash
 
-# Vedanta Truth Debate Runner
+# Vedanta Debate Runner (Python)
 # This script runs the Advaita vs Dvaita debate
 
 echo "╔═══════════════════════════════════════════════════════════════╗"
-echo "║         VEDANTA TRUTH DEBATE - Starting...                   ║"
+echo "║         VEDANTA DEBATE - Starting...                         ║"
 echo "╚═══════════════════════════════════════════════════════════════╝"
 echo ""
 
-# Check if node is available
-if ! command -v node &> /dev/null; then
-    echo "❌ Error: Node.js is not installed or not in PATH"
-    echo "Please install Node.js from https://nodejs.org/"
+# Check if Python is available
+if ! command -v python3 &> /dev/null; then
+    echo "❌ Error: Python 3 is not installed or not in PATH"
+    echo "Please install Python 3.11+ from https://python.org/"
     exit 1
 fi
 
-# Navigate to the mcp-server directory
-cd "$(dirname "$0")"
+# Navigate to project root
+cd "$(dirname "$0")/.."
+
+# Activate virtual environment if it exists
+if [ -d "venv" ]; then
+    source venv/bin/activate
+fi
 
 # Run the debate
-node examples/vedanta-truth-debate.mjs
+python3 examples/vedanta_debate.py
 
 # Check if it ran successfully
 if [ $? -eq 0 ]; then
     echo ""
     echo "✅ Debate completed successfully!"
-    echo "📝 Check VEDANTA_TRUTH_DEBATE.md for the full summary"
 else
     echo ""
     echo "❌ Debate encountered an error"

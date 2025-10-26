@@ -1,14 +1,47 @@
-# Dependencies
-node_modules/
-package-lock.json
-
-# Build outputs
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
 dist/
-*.js.map
-*.d.ts.map
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# TypeScript cache
-*.tsbuildinfo
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+coverage/
+.nyc_output/
 
 # Environment variables
 .env
@@ -31,10 +64,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Testing
-coverage/
-.nyc_output/
-
 # Temporary files
 *.tmp
 *.backup
@@ -55,3 +84,20 @@ pids/
 *.pid
 *.seed
 *.pid.lock
+
+# Node.js (legacy - keeping for reference during migration)
+node_modules/
+package-lock.json
+
+# TypeScript/JavaScript (legacy)
+dist/
+*.js.map
+*.d.ts.map
+*.tsbuildinfo
+
+# Generated output files
+*_SUMMARY.md
+*_ANALYSIS.md
+*_DEBATE_*.md
+*.summary.md
+*.analysis.md

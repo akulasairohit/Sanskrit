@@ -1,8 +1,10 @@
 #!/bin/bash
-# Wrapper script to run Sanskrit MCP server with proper Node.js path
+# Wrapper script to run Sanskrit MCP server
 
-source ~/.nvm/nvm.sh
-nvm use node > /dev/null 2>&1
+# Activate virtual environment if it exists
+if [ -d "venv" ]; then
+    source venv/bin/activate
+fi
 
-# Run the server
-exec node /Users/sairohit/Sanskrit/dist/index.js "$@"
+# Run the Python MCP server
+exec python -m sanskrit_mcp "$@"

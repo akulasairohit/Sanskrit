@@ -1,0 +1,71 @@
+[project]
+name = "sanskrit-mcp-server"
+version = "1.0.0"
+description = "Model Context Protocol server for Sanskrit agent communication with real-time translation and Vedic knowledge"
+authors = [
+    { name = "Sai Rohit Akula", email = "akulasairohit@users.noreply.github.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+keywords = ["sanskrit", "mcp", "agents", "vedanta", "ai", "language-model"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+dependencies = [
+    "mcp>=0.9.0",
+    "google-generativeai>=0.3.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "mypy>=1.5.0",
+    "black>=23.7.0",
+    "ruff>=0.0.285",
+]
+
+[project.urls]
+Homepage = "https://github.com/akulasairohit/Sanskrit"
+Repository = "https://github.com/akulasairohit/Sanskrit"
+Issues = "https://github.com/akulasairohit/Sanskrit/issues"
+
+[project.scripts]
+sanskrit-mcp = "sanskrit_mcp.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["sanskrit_mcp", "sanskrit_mcp.lib"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

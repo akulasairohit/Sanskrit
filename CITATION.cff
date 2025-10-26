@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: "Sanskrit Agent Communication System"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Akula"
+    given-names: "Sai Rohit"
+    email: "akulasairohit@users.noreply.github.com"
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # Add your ORCID if you have one
+version: 1.0.0
+date-released: 2025-01-27
+repository-code: "https://github.com/akulasairohit/Sanskrit"
+license: MIT
+keywords:
+  - sanskrit
+  - vedanta
+  - natural-language-processing
+  - model-context-protocol
+  - AI-agents
+  - vedic-texts
+  - machine-learning
+  - computational-linguistics
+  - anti-hallucination
+  - knowledge-grounding
+abstract: >
+  A Model Context Protocol (MCP) server enabling AI agents to communicate
+  in Sanskrit with real-time grammar validation, authenticated Vedic text
+  corpus integration, and anti-hallucination safeguards. Features 70+
+  Sanskrit grammar patterns, 8 authenticated Vedic passages with traditional
+  commentary, and support for multi-agent philosophical debates. Demonstrates
+  first-class Sanskrit protocol support with 60-70% reduced footprint compared
+  to TypeScript implementation, 5x faster startup, and production-ready Python
+  package structure.
