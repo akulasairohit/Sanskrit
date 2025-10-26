@@ -13,6 +13,8 @@
     "demo:live": "node examples/live-vedanta-debate.mjs",
     "demo:truth": "node examples/vedanta-truth-debate.mjs",
     "demo:learning": "node examples/gajendra-moksha-learning.mjs",
+    "demo:ai-debate": "node examples/live-ai-consciousness-debate.mjs",
+    "demo:enhanced": "node examples/enhanced-ai-debate.mjs",
     "lint": "eslint src --ext .ts || echo 'Linting skipped'",
     "clean": "rm -rf dist",
     "setup": "./scripts/setup.sh",
@@ -29,7 +31,9 @@
   "author": "Sanskrit Agent Team",
   "license": "MIT",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^17.2.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {

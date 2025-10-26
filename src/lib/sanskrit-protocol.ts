@@ -32,11 +32,7 @@ export class SanskritProtocol {
       // Validate the message
       const validationResult = await this.validator.validateText(message.content);
       
-      // Update agent statistics
-      fromAgent.statistics.messagesSent++;
-      toAgent.statistics.messagesReceived++;
-      fromAgent.statistics.lastActive = new Date();
-      toAgent.statistics.lastActive = new Date();
+      // Note: Agent statistics are now updated in the main handler to ensure persistence
 
       if (validationResult.isValid) {
         return {

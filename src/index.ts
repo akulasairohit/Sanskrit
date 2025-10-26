@@ -252,6 +252,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           }
         };
 
+        // Record message in agent statistics BEFORE processing
+        const responseTimeStart = Date.now();
+        fromAgent.recordMessageSent();
+        toAgent.recordMessageReceived();
+
         // Process through Sanskrit protocol
         const response = await sanskritProtocol.processMessage(
           message,
@@ -269,6 +274,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
         );
 
         // Log the interaction
+        const responseTime = Date.now() - responseTimeStart;
         const interaction: AgentInteraction = {
           fromAgent: parsed.fromAgent,
           toAgent: parsed.toAgent,
@@ -277,7 +283,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           type: 'direct',
           sessionId: parsed.sessionId || 'default',
           success: true,
-          responseTime: Date.now() - message.timestamp.getTime()
+          responseTime: responseTime
         };
 
         // Actually log it to the communication logger

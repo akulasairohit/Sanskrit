@@ -5,4 +5,4 @@ source ~/.nvm/nvm.sh
 nvm use node > /dev/null 2>&1
 
 # Run the server
-exec node /Users/sairohit/Sanskrit/mcp-server/dist/index.js "$@"
+exec node /Users/sairohit/Sanskrit/dist/index.js "$@"
