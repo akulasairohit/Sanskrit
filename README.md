@@ -1,58 +1,114 @@
-# 🕉️ Sanskrit Agent Communication System# 🕉️ Sanskrit Agent Communication System
+# 🕉️ Sanskrit MCP Server# 🕉️ Sanskrit Agent Communication System# 🕉️ Sanskrit Agent Communication System
 
 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 
-[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)
+[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Status](https://img.shields.io/badge/Status-Production--Ready-success.svg)]()
 
-A Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
 
-A Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
+Model Context Protocol server for AI agents to communicate in classical Sanskrit with grammar validation and Vedic corpus grounding.[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 
-## 🚀 Quick Start
 
-## 🌟 Features
 
-### Installation
+## Installation[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)
 
-### Core Capabilities
 
-```bash- **Sanskrit Grammar Validation** with 70+ pattern detection (sandhi, samāsa, vibhakti, dhātu)
 
-# Clone and setup- **Vedic Knowledge Base** with 100+ authenticated passages from classical texts
+```bash[![Status](https://img.shields.io/badge/Status-Production--Ready-success.svg)]()
 
-git clone https://github.com/akulasairohit/Sanskrit- **Anti-Hallucination Protection** through source attribution and confidence scoring
+git clone https://github.com/akulasairohit/Sanskrit
 
-cd Sanskrit- **Multi-Agent Communication** enabling philosophical discourse in Sanskrit
+cd SanskritA Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
 
-python3.11 -m venv venv- **Cultural Context Preservation** (religious references, philosophical concepts, honorifics)
+python3.11 -m venv venv
 
-source venv/bin/activate- **Traditional Commentary** from Śaṅkarācārya, Rāmānujācārya, Madhva, and other ācāryas
+source venv/bin/activateA Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
 
 pip install -r requirements.txt
 
-```### Philosophical Traditions
+```## 🚀 Quick Start
+
+
+
+## Demos## 🌟 Features
+
+
+
+**1. Five Vedānta Schools AI Debate**  ### Installation
+
+Comparative philosophy on "What is AI?" (Requires Gemini API key)
+
+### Core Capabilities
+
+```bash
+
+export GEMINI_API_KEY="your-key"```bash- **Sanskrit Grammar Validation** with 70+ pattern detection (sandhi, samāsa, vibhakti, dhātu)
+
+python examples/ai_philosophy_debate.py
+
+```# Clone and setup- **Vedic Knowledge Base** with 100+ authenticated passages from classical texts
+
+
+
+**2. Shanti Mantra Grammar Analysis**  git clone https://github.com/akulasairohit/Sanskrit- **Anti-Hallucination Protection** through source attribution and confidence scoring
+
+Line-by-line analysis with pattern detection
+
+cd Sanskrit- **Multi-Agent Communication** enabling philosophical discourse in Sanskrit
+
+```bash
+
+python examples/shanti_demo.pypython3.11 -m venv venv- **Cultural Context Preservation** (religious references, philosophical concepts, honorifics)
+
+```
+
+source venv/bin/activate- **Traditional Commentary** from Śaṅkarācārya, Rāmānujācārya, Madhva, and other ācāryas
+
+## Run MCP Server
+
+pip install -r requirements.txt
+
+```bash
+
+python -m sanskrit_mcp```### Philosophical Traditions
+
+```
 
 Pre-configured support for six schools of Vedānta philosophy:
 
+## Citation
+
 ### 🎭 Demos- **Advaita** (Non-dualism) - Śaṅkarācārya's monistic interpretation
 
-- **Dvaita** (Dualism) - Madhvācārya's dualistic philosophy
+```bibtex
 
-**1. Five Vedānta Schools AI Debate**- **Viśiṣṭādvaita** (Qualified Non-dualism) - Rāmānujācārya's synthesis
+@software{sanskrit_mcp_2025,- **Dvaita** (Dualism) - Madhvācārya's dualistic philosophy
 
-A comparative philosophy debate on "What is AI?" between 5 major Vedānta schools (Advaita, Vishishtadvaita, Dvaita, Shuddhadvaita, Achintya Bheda Abheda).- **Bhedābheda** (Difference and Non-difference)
+  title   = {Sanskrit MCP Server},
 
-*Requires `GEMINI_API_KEY`.*- **Acintya Bhedābheda** (Inconceivable Difference and Non-difference)
+  author  = {Akula, Sai Rohit},**1. Five Vedānta Schools AI Debate**- **Viśiṣṭādvaita** (Qualified Non-dualism) - Rāmānujācārya's synthesis
+
+  year    = {2025},
+
+  url     = {https://github.com/akulasairohit/Sanskrit},A comparative philosophy debate on "What is AI?" between 5 major Vedānta schools (Advaita, Vishishtadvaita, Dvaita, Shuddhadvaita, Achintya Bheda Abheda).- **Bhedābheda** (Difference and Non-difference)
+
+  version = {2.0.0}
+
+}*Requires `GEMINI_API_KEY`.*- **Acintya Bhedābheda** (Inconceivable Difference and Non-difference)
+
+```
 
 - **Śuddhādvaita** (Pure Non-dualism)
 
+## License
+
 ```bash
+
+MIT License
 
 export GEMINI_API_KEY="your-key-here"## 🚀 Quick Start
 
