@@ -1,66 +1,129 @@
-# 🕉️ Sanskrit Agent Communication System
+# 🕉️ Sanskrit Agent Communication System# 🕉️ Sanskrit Agent Communication System
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)
+
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+
+[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io)
+
 [![Status](https://img.shields.io/badge/Status-Production--Ready-success.svg)]()
 
 A Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
 
-## 🌟 Features
-
-### Core Capabilities
-- **Sanskrit Grammar Validation** with 70+ pattern detection (sandhi, samāsa, vibhakti, dhātu)
-- **Vedic Knowledge Base** with 100+ authenticated passages from classical texts
-- **Anti-Hallucination Protection** through source attribution and confidence scoring
-- **Multi-Agent Communication** enabling philosophical discourse in Sanskrit
-- **Cultural Context Preservation** (religious references, philosophical concepts, honorifics)
-- **Traditional Commentary** from Śaṅkarācārya, Rāmānujācārya, Madhva, and other ācāryas
-
-### Philosophical Traditions
-Pre-configured support for six schools of Vedānta philosophy:
-- **Advaita** (Non-dualism) - Śaṅkarācārya's monistic interpretation
-- **Dvaita** (Dualism) - Madhvācārya's dualistic philosophy
-- **Viśiṣṭādvaita** (Qualified Non-dualism) - Rāmānujācārya's synthesis
-- **Bhedābheda** (Difference and Non-difference)
-- **Acintya Bhedābheda** (Inconceivable Difference and Non-difference)
-- **Śuddhādvaita** (Pure Non-dualism)
+A Model Context Protocol (MCP) server enabling AI agents to communicate in classical Sanskrit with real-time translation, cultural context awareness, and anti-hallucination safeguards through authenticated Vedic source attribution.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Python 3.11 or higher**
-- **pip** or **uv** package manager
-- **Google Gemini API key** (for AI agent responses - optional for testing)
+## 🌟 Features
 
 ### Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/akulasairohit/Sanskrit
-cd Sanskrit
+### Core Capabilities
 
-# Create virtual environment
-python3.11 -m venv venv
-source venv/bin/activate  # On macOS/Linux
-# or: venv\Scripts\activate  # On Windows
+```bash- **Sanskrit Grammar Validation** with 70+ pattern detection (sandhi, samāsa, vibhakti, dhātu)
 
-# Install dependencies
+# Clone and setup- **Vedic Knowledge Base** with 100+ authenticated passages from classical texts
+
+git clone https://github.com/akulasairohit/Sanskrit- **Anti-Hallucination Protection** through source attribution and confidence scoring
+
+cd Sanskrit- **Multi-Agent Communication** enabling philosophical discourse in Sanskrit
+
+python3.11 -m venv venv- **Cultural Context Preservation** (religious references, philosophical concepts, honorifics)
+
+source venv/bin/activate- **Traditional Commentary** from Śaṅkarācārya, Rāmānujācārya, Madhva, and other ācāryas
+
 pip install -r requirements.txt
 
-# Or install in development mode
-pip install -e .
+```### Philosophical Traditions
 
-# Set up API key (optional for basic testing)
-cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
-```
+Pre-configured support for six schools of Vedānta philosophy:
 
-### Demo Examples
+### 🎭 Demos- **Advaita** (Non-dualism) - Śaṅkarācārya's monistic interpretation
 
-**1. Five Vedānta Schools AI Debate** - Comparative philosophy on AI
+- **Dvaita** (Dualism) - Madhvācārya's dualistic philosophy
+
+**1. Five Vedānta Schools AI Debate**- **Viśiṣṭādvaita** (Qualified Non-dualism) - Rāmānujācārya's synthesis
+
+A comparative philosophy debate on "What is AI?" between 5 major Vedānta schools (Advaita, Vishishtadvaita, Dvaita, Shuddhadvaita, Achintya Bheda Abheda).- **Bhedābheda** (Difference and Non-difference)
+
+*Requires `GEMINI_API_KEY`.*- **Acintya Bhedābheda** (Inconceivable Difference and Non-difference)
+
+- **Śuddhādvaita** (Pure Non-dualism)
+
 ```bash
-# Set your Gemini API key (get one from https://makersuite.google.com/app/apikey)
+
+export GEMINI_API_KEY="your-key-here"## 🚀 Quick Start
+
+python examples/ai_philosophy_debate.py
+
+```### Prerequisites
+
+- **Python 3.11 or higher**
+
+**2. Shanti Mantra Analysis**- **pip** or **uv** package manager
+
+Grammar analysis of the Shanti Mantra with pattern detection and peace explanations.- **Google Gemini API key** (for AI agent responses - optional for testing)
+
+
+
+```bash### Installation
+
+python examples/shanti_demo.py
+
+``````bash
+
+# Clone the repository
+
+### 🖥️ Run MCP Servergit clone https://github.com/akulasairohit/Sanskrit
+
+cd Sanskrit
+
+```bash
+
+python -m sanskrit_mcp# Create virtual environment
+
+```python3.11 -m venv venv
+
+source venv/bin/activate  # On macOS/Linux
+
+## 🔬 Citation# or: venv\Scripts\activate  # On Windows
+
+
+
+If you use this work in academic research, please cite:# Install dependencies
+
+pip install -r requirements.txt
+
+```bibtex
+
+@software{sanskrit_mcp_2025,# Or install in development mode
+
+  title        = {Sanskrit Agent Communication System: AI-Mediated Philosophical pip install -e .
+
+                  Discourse in Classical Languages via Model Context Protocol},
+
+  author       = {Akula, Sai Rohit},# Set up API key (optional for basic testing)
+
+  year         = {2025},cp .env.example .env
+
+  url          = {https://github.com/akulasairohit/Sanskrit},# Edit .env and add your GEMINI_API_KEY
+
+  version      = {1.0.0}```
+
+}
+
+```### Demo Examples
+
+
+
+## 📜 License**1. Five Vedānta Schools AI Debate** - Comparative philosophy on AI
+
+```bash
+
+MIT License - see [LICENSE](LICENSE) file for details.# Set your Gemini API key (get one from https://makersuite.google.com/app/apikey)
+
 export GEMINI_API_KEY="your-key-here"
 
 python examples/ai_philosophy_debate.py
