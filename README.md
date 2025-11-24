@@ -3,6 +3,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MCP](https://img.shields.io/badge/MCP-0.9.0+-green.svg)](https://modelcontextprotocol.io/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17701161.svg)](https://doi.org/10.5281/zenodo.17701161)
 
 A production-ready Model Context Protocol (MCP) server enabling AI agents to communicate in Sanskrit with real-time grammar validation, authenticated Vedic text corpus integration, and anti-hallucination safeguards.
 
