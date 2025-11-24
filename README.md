@@ -56,12 +56,34 @@ cp .env.example .env
 # Edit .env and add your GEMINI_API_KEY
 ```
 
-### Quick Test (No MCP Required)
+### Demo Examples
 
+**1. Five Vedānta Schools AI Debate** - Comparative philosophy on AI
 ```bash
-# Run standalone validation and corpus test
-python examples/simple_test.py
+# Set your Gemini API key (get one from https://makersuite.google.com/app/apikey)
+export GEMINI_API_KEY="your-key-here"
+
+python examples/ai_philosophy_debate.py
 ```
+
+Features:
+- **Five Vedānta schools**: Advaita, Vishishtadvaita, Dvaita, Shuddhadvaita, Achintya Bheda Abheda
+- AI-generated Sanskrit responses via Gemini for each school's perspective
+- Authentic Vedic corpus references (Māṇḍūkya, Chāndogya, Muṇḍaka Upaniṣads, etc.)
+- Synthesis showing philosophical agreements and differences
+- **Formatted for single A4 page** - ideal for academic presentations
+
+**2. Shanti Mantra Analysis** - Educational Sanskrit grammar demo
+```bash
+python examples/shanti_demo.py  # No API key required
+```
+
+Features:
+- Line-by-line analysis of Taittirīya Upaniṣad Shanti Mantra
+- Grammar pattern detection (sandhi, samāsa, vibhakti, dhātu)
+- Educational highlights on dual forms (Dvivacana) and verb moods
+- Three-fold peace explanation (Adhidaivika, Adhibhautika, Adhyātmika)
+- 100% validation confidence on authentic Sanskrit
 
 ### Using the MCP Server
 
@@ -179,9 +201,8 @@ Sanskrit/
 │       ├── sanskrit_validator.py # Grammar validation (70+ patterns)
 │       └── vedic_corpus_parser.py # Authenticated text corpus
 ├── examples/
-│   ├── simple_test.py           # Standalone functionality test
-│   ├── enhanced-ai-debate.mjs   # Vedānta debate (to be ported)
-│   └── brahma-kadigina-learning.mjs  # Telugu devotional (to be ported)
+│   ├── ai_philosophy_debate.py  # Five Vedānta schools on AI
+│   └── shanti_demo.py           # Shanti Mantra grammar analysis
 ├── pyproject.toml               # Modern Python project config
 ├── requirements.txt             # Dependencies
 ├── setup.py                     # Setuptools config
@@ -198,29 +219,35 @@ Sanskrit/
 | **Installation** | npm install + build | pip install | **Simpler** |
 | **M2 Mac Air** | Single-threaded | Multiprocessing | **Better scaling** |
 
-## 🎭 Examples
+## 🎭 Example Demonstrations
 
-### Simple Validation Test
+### 1. Five Vedānta Schools AI Debate
+
+A comparative philosophy demonstration where each major Vedānta school explains AI from their unique perspective:
+
 ```bash
-python examples/simple_test.py
+export GEMINI_API_KEY="your-key-here"
+python examples/ai_philosophy_debate.py
 ```
 
-Output:
-```
-📖 Tat Tvam Asi (Thou art That)
-   Sanskrit: तत्त्वमसि
-   Status: ✅ VALID
-   Confidence: 100.0%
-   📊 Grammar Patterns:
-      • Sandhi: 1, Samāsa: 1, Vibhakti: 1, Dhātu: 0
+Output shows each school's Sanskrit response with English translation and authentic Vedic corpus source:
+- **Advaita**: AI as māyā (illusion) - Source: Māṇḍūkya Upaniṣad
+- **Vishishtadvaita**: AI as God's body - Source: Chāndogya Upaniṣad
+- **Dvaita**: AI as eternally separate matter - Source: Muṇḍaka Upaniṣad
+- **Shuddhadvaita**: AI as Krishna's līlā - Source: Vallabha's Ānubhāṣya
+- **Achintya Bheda Abheda**: AI as simultaneously one and different - Source: Mahābhārata
+
+### 2. Shanti Mantra Grammar Analysis
+
+Educational demonstration of Sanskrit grammar with the famous peace mantra:
+
+```bash
+python examples/shanti_demo.py
 ```
 
-### Philosophical Debates (Coming Soon - Being Ported to Python)
+Shows line-by-line analysis with grammar patterns, dual forms, and three-fold peace explanation.
 
-Examples being migrated from JavaScript:
-- **Vedānta Roundtable**: Six schools discussing consciousness
-- **Truth Debate**: Advaita vs Dvaita on nature of reality
-- **Gajendra Mokṣa**: Interactive learning scenario
+See `examples/README.md` for detailed documentation of both demos.
 
 ## 🔬 Grammar Pattern Detection
 
@@ -279,13 +306,14 @@ If you use this work in academic research, please cite:
 
 ```bibtex
 @software{sanskrit_mcp_2025,
-  title={Sanskrit Agent Communication System: AI-Mediated Philosophical 
-         Discourse in Classical Languages via Model Context Protocol},
-  author={Akula, Sai Rohit},
-  year={2025},
-  url={https://github.com/akulasairohit/Sanskrit},
-  version={1.0.0},
-  note={Python implementation with MCP server}
+  title        = {Sanskrit Agent Communication System: AI-Mediated Philosophical 
+                  Discourse in Classical Languages via Model Context Protocol},
+  author       = {Akula, Sai Rohit},
+  year         = {2025},
+  month        = {11},
+  url          = {https://github.com/akulasairohit/Sanskrit},
+  version      = {1.0.0},
+  note         = {Python implementation with MCP server}
 }
 ```
 
@@ -307,9 +335,8 @@ See [`docs/PUBLICATION_README.md`](docs/PUBLICATION_README.md) for the full acad
 python -m pytest tests/
 
 # Manual validation tests
-python examples/simple_test.py
-python examples/vedanta_debate.py
-python examples/gajendra_moksha.py
+python examples/ai_philosophy_debate.py
+python examples/shanti_demo.py
 ```
 
 ### Development Mode

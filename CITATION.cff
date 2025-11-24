@@ -6,9 +6,8 @@ authors:
   - family-names: "Akula"
     given-names: "Sai Rohit"
     email: "akulasairohit@users.noreply.github.com"
-    orcid: "https://orcid.org/0000-0000-0000-0000"  # Add your ORCID if you have one
 version: 1.0.0
-date-released: 2025-01-27
+date-released: 2025-11-24
 repository-code: "https://github.com/akulasairohit/Sanskrit"
 license: MIT
 keywords:

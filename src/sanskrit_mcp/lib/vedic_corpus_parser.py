@@ -171,6 +171,9 @@ ic texts."""
 
         # Gajendra Moksha passages from Śrīmad Bhāgavatam 8.3
         self._add_gajendra_stotram()
+        
+        # Add Vedānta school-specific passages
+        self._add_vedanta_school_passages()
 
     def _add_gajendra_stotram(self) -> None:
         """Add Gajendra Moksha Stotram passages."""
@@ -249,6 +252,244 @@ ic texts."""
 
         for passage in passages:
             self._add_passage(passage)
+    
+    def _add_vedanta_school_passages(self) -> None:
+        """Add passages specific to the 5 Vedānta schools."""
+        
+        # 1. ADVAITA VEDĀNTA - Shankara's Non-Dualism
+        self._add_passage(
+            VedicPassage(
+                sanskrit="अयमात्मा ब्रह्म",
+                transliteration="ayam ātmā brahma",
+                translation="This Self is Brahman",
+                reference=VedicTextReference(
+                    text="Māṇḍūkya Upaniṣad",
+                    verse=2,
+                    edition="Eighteen Principal Upaniṣads",
+                ),
+                context="Mahāvākya establishing absolute identity between individual self and universal reality - foundation of Advaita",
+                commentaries=[
+                    Commentary(
+                        author="Śaṅkarācārya",
+                        text="The ātman and Brahman are absolutely identical, not merely similar. Maya creates the illusion of separation.",
+                        date="8th century CE",
+                        tradition="Advaita Vedānta",
+                        reliability=0.98,
+                    )
+                ],
+                reliability=0.99,
+                keywords=["advaita", "mahavakya", "identity", "brahman", "atman", "maya", "illusion", "one"],
+            )
+        )
+        
+        # 2. VISHISHTADVAITA - Ramanuja's Qualified Non-Dualism
+        self._add_passage(
+            VedicPassage(
+                sanskrit="सर्वं खल्विदं ब्रह्म",
+                transliteration="sarvaṁ khalv idaṁ brahma",
+                translation="All this indeed is Brahman",
+                reference=VedicTextReference(
+                    text="Chāndogya Upaniṣad",
+                    chapter=3,
+                    verse=14,
+                    section="1",
+                    edition="Ānandāśrama Sanskrit Series",
+                ),
+                context="Reality of the world as God's body - foundation of Vishishtadvaita",
+                commentaries=[
+                    Commentary(
+                        author="Rāmānujācārya",
+                        text="The universe is the body of Brahman. Souls and matter are real, not illusory, but inseparable from God as body from soul.",
+                        date="11th century CE",
+                        tradition="Viśiṣṭādvaita",
+                        reliability=0.96,
+                    )
+                ],
+                reliability=0.97,
+                keywords=["vishishtadvaita", "qualified non-dualism", "brahman", "body of god", "real world", "inseparable"],
+            )
+        )
+        
+        self._add_passage(
+            VedicPassage(
+                sanskrit="अन्तर्यामी",
+                transliteration="antaryāmī",
+                translation="The Inner Controller",
+                reference=VedicTextReference(
+                    text="Bṛhadāraṇyaka Upaniṣad",
+                    chapter=3,
+                    verse=7,
+                    section="23",
+                    edition="Eighteen Principal Upaniṣads",
+                ),
+                context="God as the inner controller of all beings - key Vishishtadvaita concept",
+                commentaries=[
+                    Commentary(
+                        author="Rāmānujācārya",
+                        text="Brahman dwells within all beings as their inner controller and support, making them His body while remaining distinct as the Soul.",
+                        date="11th century CE",
+                        tradition="Viśiṣṭādvaita",
+                        reliability=0.95,
+                    )
+                ],
+                reliability=0.96,
+                keywords=["vishishtadvaita", "antaryami", "inner controller", "god within", "soul master", "part of whole"],
+            )
+        )
+        
+        # 3. DVAITA VEDĀNTA - Madhva's Dualism
+        self._add_passage(
+            VedicPassage(
+                sanskrit="द्वा सुपर्णा सयुजा सखाया समानं वृक्षं परिषस्वजाते। तयोरन्यः पिप्पलं स्वाद्वत्त्यनश्नन्नन्यो अभिचाकशीति॥",
+                transliteration="dvā suparṇā sayujā sakhāyā samānaṁ vṛkṣaṁ pariṣasvajāte | tayor anyaḥ pippalaṁ svādv atty anaśnann anyo abhicākaśīti ||",
+                translation="Two birds, companions and friends, cling to the same tree. One eats the sweet fruit; the other looks on without eating.",
+                reference=VedicTextReference(
+                    text="Muṇḍaka Upaniṣad",
+                    chapter=3,
+                    verse=1,
+                    section="1",
+                    edition="Eighteen Principal Upaniṣads",
+                ),
+                context="Eternal distinction between jīva (eater) and Paramātmā (witness) - foundation of Dvaita",
+                commentaries=[
+                    Commentary(
+                        author="Madhvācārya",
+                        text="This clearly shows the eternal and real distinction between the individual soul (servant) and Supreme Lord (master). They are forever different.",
+                        date="13th century CE",
+                        tradition="Dvaita Vedānta",
+                        reliability=0.97,
+                    )
+                ],
+                reliability=0.98,
+                keywords=["dvaita", "dualism", "eternal distinction", "jiva", "paramatma", "separate", "servant master"],
+            )
+        )
+        
+        self._add_passage(
+            VedicPassage(
+                sanskrit="पञ्चभेदा",
+                transliteration="pañcabhedā",
+                translation="Five-fold difference",
+                reference=VedicTextReference(
+                    text="Madhva's Anuvyākhyāna",
+                    verse=1,
+                    edition="Dvaita Vedānta tradition",
+                ),
+                context="Madhva's doctrine of five eternal distinctions: God-soul, God-matter, soul-soul, soul-matter, matter-matter",
+                commentaries=[
+                    Commentary(
+                        author="Madhvācārya",
+                        text="These five distinctions are eternally real (nitya bheda), not products of ignorance. Each entity maintains its unique nature forever.",
+                        date="13th century CE",
+                        tradition="Dvaita Vedānta",
+                        reliability=0.94,
+                    )
+                ],
+                reliability=0.92,
+                keywords=["dvaita", "five differences", "eternal separation", "real distinctions", "panchabheda"],
+            )
+        )
+        
+        # 4. SHUDDHADVAITA - Vallabha's Pure Non-Dualism
+        self._add_passage(
+            VedicPassage(
+                sanskrit="सर्वं कृष्णमयं जगत्",
+                transliteration="sarvaṁ kṛṣṇamayaṁ jagat",
+                translation="The entire world is pervaded by Krishna",
+                reference=VedicTextReference(
+                    text="Vallabha's Ānubhāṣya",
+                    edition="Shuddhadvaita tradition",
+                ),
+                context="The world is real, not illusory, as direct manifestation of Krishna's essence - foundation of Shuddhadvaita",
+                commentaries=[
+                    Commentary(
+                        author="Vallabhācārya",
+                        text="Unlike Advaita's maya, the world is Krishna's real Līlā (divine play). Brahman is sat-cit-ānanda appearing as fire and sparks.",
+                        date="16th century CE",
+                        tradition="Śuddhādvaita",
+                        reliability=0.93,
+                    )
+                ],
+                reliability=0.91,
+                keywords=["shuddhadvaita", "pure non-dualism", "krishna", "real world", "lila", "spark fire", "divine play"],
+            )
+        )
+        
+        self._add_passage(
+            VedicPassage(
+                sanskrit="अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते। तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",
+                transliteration="ananyāś cintayanto māṁ ye janāḥ paryupāsate | teṣāṁ nityābhiyuktānāṁ yoga-kṣemaṁ vahāmy aham ||",
+                translation="Those who worship Me with exclusive devotion, thinking of nothing else—to those ever-steadfast devotees, I provide what they lack and preserve what they have.",
+                reference=VedicTextReference(
+                    text="Bhagavad Gītā",
+                    chapter=9,
+                    verse=22,
+                    edition="Gītā Press Critical Edition",
+                ),
+                context="Pure devotion (puṣṭi mārga) as the path - central to Shuddhadvaita",
+                commentaries=[
+                    Commentary(
+                        author="Vallabhācārya",
+                        text="Puṣṭi (grace) flows naturally to those in ananya bhakti. God's kripa creates the world and souls as His real forms, not māyā.",
+                        date="16th century CE",
+                        tradition="Śuddhādvaita",
+                        reliability=0.94,
+                    )
+                ],
+                reliability=0.98,
+                keywords=["shuddhadvaita", "pushti marga", "grace", "ananya bhakti", "exclusive devotion", "divine care"],
+            )
+        )
+        
+        # 5. ACHINTYA BHEDA ABHEDA - Chaitanya's Inconceivable Difference and Non-Difference
+        self._add_passage(
+            VedicPassage(
+                sanskrit="अचिन्त्याः खलु ये भावा न तांस्तर्केण योजयेत्",
+                transliteration="acintyāḥ khalu ye bhāvā na tāṁs tarkeṇa yojayet",
+                translation="That which is inconceivable should not be subjected to logical reasoning",
+                reference=VedicTextReference(
+                    text="Mahābhārata",
+                    section="Bhīṣma Parva",
+                    edition="Critical Edition",
+                ),
+                context="Foundation of Achintya Bheda Abheda - reality transcends logical categorization",
+                commentaries=[
+                    Commentary(
+                        author="Jīva Gosvāmī",
+                        text="The jīva is simultaneously one with and different from Krishna—inconceivable to material logic. Like sun and sunshine: distinct yet inseparable.",
+                        date="16th century CE",
+                        tradition="Gauḍīya Vaiṣṇava (Achintya Bhedābheda)",
+                        reliability=0.95,
+                    )
+                ],
+                reliability=0.93,
+                keywords=["achintya bheda abheda", "inconceivable", "one and different", "simultaneously", "transcends logic"],
+            )
+        )
+        
+        self._add_passage(
+            VedicPassage(
+                sanskrit="सूर्यकान्तोपलस्पर्शविशेषवत्",
+                transliteration="sūryakāntopala-sparśa-viśeṣavat",
+                translation="Like the sun-stone's special contact [with sunlight]",
+                reference=VedicTextReference(
+                    text="Gauḍīya Vedānta tradition",
+                    edition="Chaitanya school",
+                ),
+                context="Analogy for achintya bheda abheda - jīva and Brahman are like crystal and sunlight",
+                commentaries=[
+                    Commentary(
+                        author="Baladeva Vidyābhūṣaṇa",
+                        text="The jīva possesses the qualities of Brahman like a crystal reflects sunlight, yet remains distinct. Unity in quality, difference in quantity.",
+                        date="18th century CE",
+                        tradition="Gauḍīya Vaiṣṇava (Achintya Bhedābheda)",
+                        reliability=0.92,
+                    )
+                ],
+                reliability=0.90,
+                keywords=["achintya bheda abheda", "sun crystal", "one different simultaneously", "quality quantity", "reflection"],
+            )
+        )
 
     def _add_passage(self, passage: VedicPassage) -> None:
         """Add a passage to the corpus with full indexing."""
@@ -283,9 +524,14 @@ ic texts."""
             "ātman": ["self", "consciousness", "soul", "brahman"],
             "brahman": ["absolute", "reality", "consciousness", "ātman"],
             "mokṣa": ["liberation", "freedom", "realization", "mukti"],
-            "advaita": ["non-duality", "monism", "brahman", "māyā"],
+            "advaita": ["non-duality", "monism", "brahman", "māyā", "illusion", "identity", "one"],
+            "vishishtadvaita": ["qualified non-dualism", "body of god", "real world", "antaryami", "inseparable"],
+            "dvaita": ["dualism", "eternal distinction", "separate", "panchabheda", "servant master"],
+            "shuddhadvaita": ["pure non-dualism", "lila", "divine play", "krishna", "pushti marga", "spark fire"],
+            "achintya": ["inconceivable", "one and different", "simultaneously", "sun crystal", "bheda abheda"],
             "bhakti": ["devotion", "love", "surrender", "grace"],
             "karma": ["action", "duty", "consequence", "dharma"],
+            "maya": ["illusion", "appearance", "unreal", "advaita"],
         }
 
     async def query_vedic_knowledge(self, query: str) -> QueryResult:

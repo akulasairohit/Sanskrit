@@ -21,6 +21,7 @@ from .lib.agent_registry import AgentRegistry
 from .lib.sanskrit_validator import SanskritValidator
 from .lib.vedic_corpus_parser import VedicCorpusParser
 from .lib.types import Agent, SanskritCapabilities, Formality
+from .lib.gemini_client import GeminiClient
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -30,6 +31,7 @@ logger = logging.getLogger(__name__)
 agent_registry = AgentRegistry()
 sanskrit_validator = SanskritValidator()
 vedic_corpus = VedicCorpusParser()
+gemini_client = GeminiClient()
 
 # Create MCP server
 app = Server("sanskrit-agent-communication")
@@ -232,11 +234,20 @@ async def handle_translate(args: dict[str, Any]) -> list[TextContent]:
     text = args["text"]
     direction = args["direction"]
 
-    # Simple translation placeholder - in production use AI model
-    if direction == "sanskrit-to-english":
-        result = f"English translation of: {text}\n(Translation service placeholder)"
+    # Use Gemini for translation
+    if gemini_client.model:
+        result = await gemini_client.translate_text(
+            text, 
+            direction, 
+            include_transliteration=args.get("includeTransliteration", False),
+            cultural_context=args.get("culturalContext", False)
+        )
     else:
-        result = f"Sanskrit translation of: {text}\n(Translation service placeholder)"
+        # Fallback if API key not set
+        if direction == "sanskrit-to-english":
+            result = f"English translation of: {text}\n(Gemini API key not set)"
+        else:
+            result = f"Sanskrit translation of: {text}\n(Gemini API key not set)"
 
     return [TextContent(type="text", text=result)]
 
@@ -309,6 +320,14 @@ async def handle_query_vedic_knowledge(args: dict[str, Any]) -> list[TextContent
         response += f"\n⚠️ Warnings:\n"
         for warning in result.warnings:
             response += f"  • {warning}\n"
+
+    # Enhance with Gemini if available
+    if gemini_client.model and result.confidence < 0.8:
+        gemini_insight = await gemini_client.generate_content(
+            f"Provide a brief scholarly insight on this Vedic topic: {query}. "
+            f"Context from corpus: {result.synthesized_answer}"
+        )
+        response += f"\n🤖 AI Insight:\n{gemini_insight}\n"
 
     return [TextContent(type="text", text=response)]
 
