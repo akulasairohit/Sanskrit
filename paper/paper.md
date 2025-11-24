@@ -36,6 +36,8 @@ There is a critical need for a bridge that connects these rigorous philological 
 
 The project draws direct inspiration from Rick Briggs' seminal paper, "Knowledge Representation in Sanskrit and Artificial Intelligence" [@briggs:1985]. Briggs argued that Sanskrit's rigorous grammatical structure, as codified by Pāṇini, functions similarly to a formal knowledge representation language suitable for AI. Forty years later, **Sanskrit MCP** attempts to operationalize this vision by providing modern AI agents with a structured interface to access and validate Sanskrit knowledge, treating the language not just as text to be predicted, but as a structured system to be queried.
 
+This work also builds upon the foundational computational linguistics research presented at the World Sanskrit Conference [@huet:2018], particularly the efforts to digitize and structure Pāṇinian grammar rules. The architectural approach of integrating deep linguistic knowledge with digital tools is further informed by the work of Peter Scharf [@scharf:profile] on the Sanskrit Library and the precise digital representation of Vedic texts.
+
 # Functionality
 
 The software implements the Model Context Protocol, exposing the following key tools:
