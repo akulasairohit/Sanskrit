@@ -25,7 +25,7 @@ class GeminiClient:
             return
 
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
         logger.info("Gemini Client initialized successfully.")
 
     async def translate_text(

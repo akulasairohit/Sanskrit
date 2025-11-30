@@ -1,0 +1,75 @@
+{
+  "agni": {
+    "word": "अग्नि",
+    "iast": "agni",
+    "meanings": [
+      "Fire; the physical element of fire.",
+      "The Vedic god of fire; considered the messenger between gods and humans, the mouth of the gods to which sacrifices are offered.",
+      "Gastric fire, digestive power.",
+      "One of the eight guardians of the world (Dikpalas), regent of the southeast.",
+      "The number three (associated with the three sacred fires).",
+      "Name of several plants, including Plumbago Zeylanica (Chitraka)."
+    ],
+    "etymology": "√añc (to move tortuously, to blaze), with suffix -ni. Related to Latin 'ignis' and English 'ignite'.",
+    "gender": "M",
+    "source": "Gemini (Monier-Williams)",
+    "timestamp": 1764517905027
+  },
+  "shanti": {
+    "word": "शान्ति",
+    "iast": "śānti",
+    "meanings": [
+      "Tranquillity, calmness, composure, quiet, serenity, peacefulness, absence of disturbance.",
+      "Peace (between individuals or nations); reconciliation; concord; harmony.",
+      "Cessation, rest, repose, abatement, alleviation (of pain or sorrow etc.).",
+      "Extinction, annihilation, destruction (of disease, sins, etc.).",
+      "Release from transmigration, final beatitude, emancipation.",
+      "Auspiciousness, good fortune.",
+      "Appeasement, propitiation, expiation, atonement.",
+      "A ceremony for averting evil, pacifying deities, or counteracting hostile influences; an expiatory rite.",
+      "A form of Durga.",
+      "Name of several plants (e.g., *Curcuma zerumbet*, *Costus speciosus*).",
+      "Final benediction uttered at the close of a Vedic recitation or ceremony: Oṃ śāntiḥ śāntiḥ śāntiḥ",
+      "Quietism, the state of mind which regards equanimity or indifference to all worldly concerns as the supreme good."
+    ],
+    "etymology": "√शम् (śam) + -ति (ti)",
+    "gender": "F",
+    "source": "Gemini (Monier-Williams)",
+    "timestamp": 1764517926199
+  },
+  "महीशाः।": {
+    "word": "महीशाः",
+    "iast": "mahīśāḥ",
+    "meanings": [
+      "Kings",
+      "Rulers of the earth"
+    ],
+    "etymology": "Compound of मही (mahī) 'earth, land' + ईश (īśa) 'lord, ruler'",
+    "gender": "M",
+    "source": "Gemini (Monier-Williams)",
+    "timestamp": 1764517984567
+  },
+  "dharma": {
+    "word": "धर्म",
+    "iast": "dharma",
+    "meanings": [
+      "Law, custom, ordinance, statute.",
+      "Duty, religious or moral merit, virtue, righteousness.",
+      "Prescribed conduct, mode of life.",
+      "Essential quality, characteristic property.",
+      "Nature, disposition, state.",
+      "Justice.",
+      "Right (in law).",
+      "Religious practice or usage.",
+      "A meritorious act, a good work.",
+      "The doctrine professed in a religion, religious truth.",
+      "Usage, practice, custom, established rule.",
+      "In philosophy, an element of existence; an attribute, quality, form, or condition.",
+      "As a technical term in Buddhism, referring to the cosmic law and order and also the teachings of the Buddha."
+    ],
+    "etymology": "√dhṛ (to hold, support, maintain) + -man (suffix forming abstract nouns). Thus, 'that which holds, supports, maintains'.",
+    "gender": "M",
+    "source": "Gemini (Monier-Williams)",
+    "timestamp": 1764518062270
+  }
+}
