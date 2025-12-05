@@ -71,5 +71,23 @@
     "gender": "M",
     "source": "Gemini (Monier-Williams)",
     "timestamp": 1764518062270
+  },
+  "vayu": {
+    "word": "वायु",
+    "iast": "vāyu",
+    "meanings": [
+      "Wind, air; the element air, one of the five elements (pañca-bhūtāni).",
+      "The god of wind, often regarded as a regent of the north-west quarter; he is identified with Pavan and Prana.",
+      "Breath; the vital air or principle of life.",
+      "Name of a class of demi-gods (sometimes reckoned as thirty-three).",
+      "A disease of the windy humour, rheumatism, gout, paralysis.",
+      "The son of Anjana, and father (spiritually) of Hanuman; considered an incarnation of Shiva in some accounts.",
+      "The number 'forty-nine' (alluding to the forty-nine winds according to some authorities).",
+      "A particular vital air or energy current within the body (often referred to as a 'prana')."
+    ],
+    "etymology": "Root √vā ('to blow, move'); related to Latin 'ventus', English 'wind'.",
+    "gender": "M",
+    "source": "Gemini (Monier-Williams)",
+    "timestamp": 1764868772295
   }
 }

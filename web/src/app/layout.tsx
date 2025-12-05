@@ -6,8 +6,19 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Sanskrit Gemini",
-  description: "AI-powered Sanskrit Agent & Vedic Knowledge Base",
+  title: "Sanskrit",
+  description: "AI-powered Sanskrit Agent with Vedic Knowledge Base. Translate, analyze grammar, and explore authentic Vedic texts.",
+  keywords: ["Sanskrit", "Vedic", "Translation", "Grammar", "AI", "Upanishads", "Bhagavad Gita"],
+  openGraph: {
+    title: "Sanskrit",
+    description: "AI-powered Sanskrit Agent with Vedic Knowledge Base",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sanskrit",
+    description: "AI-powered Sanskrit Agent with Vedic Knowledge Base",
+  },
 };
 
 export default function RootLayout({

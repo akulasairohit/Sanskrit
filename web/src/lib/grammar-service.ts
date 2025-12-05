@@ -14,10 +14,15 @@ export class GrammarService {
         this.model = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     }
 
-    async analyzeGrammar(message: string): Promise<GrammarAnalysisResult> {
+    async analyzeGrammar(message: string, pythonContext?: any): Promise<GrammarAnalysisResult> {
         try {
+            let contextStr = "";
+            if (pythonContext && Object.keys(pythonContext).length > 0) {
+                contextStr = `\nHere is some preliminary rule-based analysis to help you (use this to ensure accuracy): ${JSON.stringify(pythonContext)}`;
+            }
+
             const prompt = `
-                Analyze the Sanskrit grammar of the following request: "${message}".
+                Analyze the Sanskrit grammar of the following text: "${message}".${contextStr}
                 
                 1. Provide a clear, educational explanation in markdown.
                 2. AT THE END, provide a JSON block wrapped in \`\`\`json ... \`\`\` with the following structure for visualization:
@@ -25,14 +30,34 @@ export class GrammarService {
                     "sentence": "${message}",
                     "breakdown": [
                         {
-                            "original_text": "The specific substring from the original text (e.g., 'Rāmaḥ')",
-                            "split_form": "The grammatically split form (e.g., 'Rāmaḥ')",
-                            "meaning": "English meaning",
+                            "original_text": "substring",
+                            "split_form": "split form",
+                            "meaning": "meaning",
                             "category": "noun" | "verb" | "indeclinable" | "compound" | "other",
-                            "details": "Grammar details (e.g., 'Nom. Sg. Masc.')"
+                            "details": "grammar details"
                         }
-                    ]
+                    ],
+                    "graph": {
+                        "nodes": [
+                            { "id": "unique_id", "position": { "x": 0, "y": 0 }, "data": { "label": "Label" }, "style": { "background": "color", "color": "white", "borderRadius": "8px", "padding": "10px" } }
+                        ],
+                        "edges": [
+                            { "id": "e1", "source": "source_id", "target": "target_id", "label": "Relation (e.g. Karta)", "animated": true }
+                        ]
+                    },
+                    "morphology_tree": {
+                        "id": "root",
+                        "label": "${message}",
+                        "type": "word",
+                        "details": "Sentence",
+                        "children": [
+                            { "id": "child1", "label": "Word1", "type": "word", "details": "Grammar", "children": [] }
+                        ]
+                    }
                 }
+                
+                For the graph: Create a Karaka (semantic) dependency graph. Nodes are words/concepts, edges are relations (Karta, Karma, etc.).
+                For the morphology_tree: Create a hierarchical breakdown (Prakriti-Pratyaya) for the main words.
             `;
 
             const result = await this.model.generateContent(prompt);

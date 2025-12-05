@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&display=swap');
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-border: hsl(var(--border));
@@ -32,7 +34,12 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --font-sans: var(--font-inter);
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Cinzel", serif;
+
+  --color-sanskrit-gold: #d4af37;
+  --color-deep-space: #0a0f1c;
+  --color-lotus-pink: #e05a8f;
 }
 
 :root {

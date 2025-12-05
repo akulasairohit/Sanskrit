@@ -65,7 +65,14 @@ class GeminiClient:
         if cultural_context:
             prompt += "3. Provide brief cultural or philosophical context if relevant.\n"
             
-        prompt += "\nFormat the output clearly."
+        prompt += """
+        Output Format (Use Markdown):
+        1. **Translation**: Clear and precise.
+        2. **Sanskrit**: Use **Bold** for Devanagari script.
+        3. **Transliteration**: Use *Italics* for IAST.
+        4. **Breakdown**: Provide a Markdown table with columns: | Word | Meaning | Grammar/Notes |.
+        5. **Context**: Use > Blockquotes for cultural/philosophical insights.
+        """
 
         try:
             response = await self.model.generate_content_async(prompt)

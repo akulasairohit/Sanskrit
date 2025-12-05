@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  sanskrit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GEMINI_API_KEY: ${GEMINI_API_KEY}
+    ports:
+      - "3000:3000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      # Mount the brain/data directory if needed for persistence
+      - ./data:/app/data

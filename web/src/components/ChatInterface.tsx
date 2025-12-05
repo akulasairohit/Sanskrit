@@ -4,10 +4,12 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Sparkles, User, Bot, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { GrammarVisualization } from "./GrammarVisualization";
 
-import { WelcomeScreen } from "./WelcomeScreen";
+import { HomeView } from "./HomeView";
 
 interface Message {
     role: "user" | "model";
@@ -16,11 +18,17 @@ interface Message {
     grammarData?: any;
 }
 
-export function ChatInterface() {
+interface ChatInterfaceProps {
+    initialQuery?: string;
+    setActiveTab?: (tab: "chat" | "dictionary" | "grammar" | "resources") => void;
+}
+
+export function ChatInterface({ initialQuery, setActiveTab }: ChatInterfaceProps) {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const hasRunInitialQuery = useRef(false);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,23 +38,23 @@ export function ChatInterface() {
         scrollToBottom();
     }, [messages]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!input.trim() || isLoading) return;
+    useEffect(() => {
+        if (initialQuery && !hasRunInitialQuery.current) {
+            hasRunInitialQuery.current = true;
+            handleQuery(initialQuery);
+        }
+    }, [initialQuery]);
 
-        const userMessage = input;
-        setInput("");
-        setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    const handleQuery = async (query: string) => {
+        setMessages(prev => [...prev, { role: "user", content: query }]);
         setIsLoading(true);
-
         try {
             const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage }),
+                body: JSON.stringify({ message: query }),
             });
             const data = await res.json();
-
             setMessages((prev) => [
                 ...prev,
                 {
@@ -66,6 +74,23 @@ export function ChatInterface() {
         }
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!input.trim() || isLoading) return;
+        const userMessage = input;
+        setInput("");
+        handleQuery(userMessage);
+    };
+
+    if (messages.length === 0) {
+        return (
+            <HomeView
+                onSearch={handleQuery}
+                onTabChange={(tab) => setActiveTab?.(tab)}
+            />
+        );
+    }
+
     return (
         <div className="flex flex-col h-full max-w-4xl mx-auto w-full relative">
             {messages.length > 0 && (
@@ -79,9 +104,6 @@ export function ChatInterface() {
                 </div>
             )}
             <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-32 scrollbar-hide">
-                {messages.length === 0 && (
-                    <WelcomeScreen setInput={setInput} />
-                )}
 
                 {messages.map((msg, idx) => (
                     <motion.div
@@ -111,7 +133,11 @@ export function ChatInterface() {
                                     Used tool: {msg.toolUsed}
                                 </div>
                             )}
-                            <div className="whitespace-pre-wrap leading-relaxed">{msg.content}</div>
+                            <div className="prose prose-invert max-w-none text-sm leading-relaxed">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {msg.content}
+                                </ReactMarkdown>
+                            </div>
 
                             {/* Grammar Visualization */}
                             {msg.grammarData && (
@@ -140,14 +166,14 @@ export function ChatInterface() {
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background to-transparent pt-10">
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background to-transparent pt-10 pb-20 md:pb-4">
                 <form onSubmit={handleSubmit} className="relative max-w-3xl mx-auto">
                     <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Enter a prompt here"
-                        className="w-full bg-secondary/50 hover:bg-secondary/80 focus:bg-secondary transition-colors border-none rounded-full py-4 pl-6 pr-14 text-lg focus:ring-2 focus:ring-primary/20 outline-none"
+                        className="w-full bg-secondary/50 hover:bg-secondary/80 focus:bg-secondary transition-colors border-none rounded-full py-3 md:py-4 pl-4 md:pl-6 pr-12 md:pr-14 text-base md:text-lg focus:ring-2 focus:ring-primary/20 outline-none"
                     />
                     <button
                         type="submit"
@@ -158,7 +184,7 @@ export function ChatInterface() {
                     </button>
                 </form>
                 <p className="text-center text-xs text-muted-foreground mt-3">
-                    Gemini may display inaccurate info, including about people, so double-check its responses.
+                    AI may produce inaccurate information. Verify important details with authoritative sources.
                 </p>
             </div>
         </div>

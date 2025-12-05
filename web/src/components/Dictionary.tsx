@@ -42,9 +42,9 @@ export function Dictionary() {
     };
 
     return (
-        <div className="flex flex-col h-full max-w-4xl mx-auto w-full p-6">
-            <div className="text-center mb-10 mt-8">
-                <h1 className="text-3xl font-serif font-medium mb-2">Sanskrit Dictionary</h1>
+        <div className="flex flex-col h-full max-w-4xl mx-auto w-full p-4 md:p-6 pb-24 md:pb-6">
+            <div className="text-center mb-6 md:mb-10 mt-4 md:mt-8">
+                <h1 className="text-2xl md:text-3xl font-serif font-medium mb-2">Sanskrit Dictionary</h1>
                 <p className="text-muted-foreground">Powered by Monier-Williams & AI</p>
             </div>
 

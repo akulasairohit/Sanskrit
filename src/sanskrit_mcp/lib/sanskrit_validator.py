@@ -10,6 +10,10 @@ from .types import (
     ValidationResult,
     ValidationWarning,
 )
+from .panini import PaniniEngine
+from .morphology import MorphologicalAnalyzer
+from .semantics import SanskritSemanticParser
+from .samasa import SamasaAnalyzer
 
 
 class SanskritValidator:
@@ -59,6 +63,10 @@ class SanskritValidator:
         self.require_proper_sandhi = True
         self.strict_grammar = False
         self.allow_modern_usage = True
+        self.panini_engine = PaniniEngine()
+        self.morph_analyzer = MorphologicalAnalyzer()
+        self.semantic_parser = SanskritSemanticParser()
+        self.samasa_analyzer = SamasaAnalyzer()
 
     async def validate_text(self, text: str) -> ValidationResult:
         """
@@ -108,11 +116,106 @@ class SanskritValidator:
         # Detect Sanskrit grammar patterns
         result.grammar_patterns = self._detect_grammar_patterns(normalized_text)
 
+        # Add Pāṇinian explanations
+        panini_explanations = self.panini_engine.explain_sandhi(normalized_text)
+        for explanation in panini_explanations:
+            result.suggestions.append(explanation)
+
+        # Add Morphological Analysis
+        words = normalized_text.split()
+        for word in words:
+            analyses = self.morph_analyzer.analyze(word)
+            for analysis in analyses:
+                role = self.morph_analyzer.get_semantic_role(analysis)
+                if analysis.category == "noun":
+                    result.suggestions.append(
+                        f"Morphology ({word}): {analysis.stem} + {analysis.suffix} "
+                        f"[{analysis.attributes['case']} {analysis.attributes['number']}] -> Role: {role}"
+                    )
+                elif analysis.category == "verb":
+                    result.suggestions.append(
+                        f"Morphology ({word}): {analysis.stem} + {analysis.suffix} "
+                        f"[{analysis.attributes['person']} {analysis.attributes['number']}]"
+                    )
+
+        # Build Semantic Graph
+        semantic_graph = self.semantic_parser.parse_sentence(normalized_text)
+        if semantic_graph.nodes and semantic_graph.edges:
+            result.semantic_graph = semantic_graph.to_json()
+            result.suggestions.append("--- Semantic Network (Kāraka) ---")
+            for edge in semantic_graph.edges:
+                # Find labels
+                source = next(n for n in semantic_graph.nodes if n.id == edge.source_id)
+                target = next(n for n in semantic_graph.nodes if n.id == edge.target_id)
+                result.suggestions.append(f"{source.label} --[{edge.relation}]--> {target.label}")
+
+        # Add Samāsa Analysis
+        words = normalized_text.split()
+        for word in words:
+            samasa_result = self.samasa_analyzer.analyze(word)
+            if samasa_result:
+                result.suggestions.append(
+                    f"Compound ({word}): {samasa_result.compound_type} -> "
+                    f"{' + '.join(samasa_result.constituents)} ({samasa_result.meaning_structure})"
+                )
+
+        # Build Morphology Tree
+        result.morphology_tree = self._build_morphology_tree(normalized_text)
+
         # Calculate confidence
         result.confidence = self._calculate_confidence(result)
         result.is_valid = len(result.errors) == 0
 
         return result
+
+    def _build_morphology_tree(self, text: str) -> list[dict]:
+        """Build hierarchical morphology tree for visualization."""
+        trees = []
+        words = text.split()
+        
+        for i, word in enumerate(words):
+            analyses = self.morph_analyzer.analyze(word)
+            if not analyses:
+                continue
+                
+            # Take first analysis for visualization
+            analysis = analyses[0]
+            
+            # Root Node (The Word)
+            word_node = {
+                "id": f"word-{i}",
+                "label": f"{word}",
+                "type": "word",
+                "details": f"{analysis.category.title()}",
+                "children": []
+            }
+            
+            # Stem Node (Prakṛti)
+            stem_node = {
+                "id": f"stem-{i}",
+                "label": f"{analysis.stem}",
+                "type": "stem",
+                "details": "Prakṛti (Base)",
+                "children": []
+            }
+            
+            # Suffix Node (Pratyaya)
+            suffix_details = []
+            for k, v in analysis.attributes.items():
+                suffix_details.append(f"{k}: {v}")
+            
+            suffix_node = {
+                "id": f"suffix-{i}",
+                "label": f"{analysis.suffix}",
+                "type": "suffix",
+                "details": ", ".join(suffix_details),
+                "children": []
+            }
+            
+            word_node["children"] = [stem_node, suffix_node]
+            trees.append(word_node)
+            
+        return trees
 
     def _normalize_text(self, text: str) -> str:
         """Normalize text using Unicode NFC normalization."""

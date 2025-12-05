@@ -55,7 +55,7 @@ export async function POST(req: Request) {
             }
         }
         // 3. Multi-Agent Debate Intent
-        else if (lowerMsg.includes("debate") && lowerMsg.includes("agent")) {
+        else if (lowerMsg.includes("debate") && (lowerMsg.includes("agent") || lowerMsg.includes("scholar") || lowerMsg.includes("simulate"))) {
             toolUsed = "multi_agent_simulation";
 
             // 1. Register Agents
@@ -159,14 +159,44 @@ export async function POST(req: Request) {
         else if (lowerMsg.includes("analyze") && (lowerMsg.includes("grammar") || lowerMsg.includes("sanskrit"))) {
             toolUsed = "grammar_analysis";
 
+            // 1. Get Python Analysis (Validation & Patterns)
+            let pythonAnalysis: any = {};
+            try {
+                const pythonResult: any = await mcpClient.callTool("validate_grammar", {
+                    text: message
+                });
+
+                let jsonText = "";
+                if (Array.isArray(pythonResult) && pythonResult[0]?.text) {
+                    jsonText = pythonResult[0].text;
+                } else if (pythonResult?.content && Array.isArray(pythonResult.content)) {
+                    jsonText = pythonResult.content[0]?.text || "";
+                } else if (typeof pythonResult === "string") {
+                    jsonText = pythonResult;
+                }
+
+                if (jsonText) {
+                    pythonAnalysis = JSON.parse(jsonText);
+                }
+            } catch (err) {
+                console.error("Python Analysis Error:", err);
+            }
+
             if (!GENAI_API_KEY) {
                 responseText = "I can help analyze Sanskrit grammar, but the Gemini API key is missing.";
             } else {
                 try {
                     const grammarService = new GrammarService(GENAI_API_KEY);
-                    const result = await grammarService.analyzeGrammar(message);
+                    // Pass python analysis to Gemini to enhance
+                    const result = await grammarService.analyzeGrammar(message, pythonAnalysis);
                     responseText = result.response;
                     const grammarData = result.grammarData;
+
+                    // Merge Python data if Gemini didn't generate graph/tree
+                    if (grammarData) {
+                        // If Python has specific structural data, we could inject it here
+                        // For now, we rely on Gemini to have used the Python context
+                    }
 
                     return NextResponse.json({ response: responseText, tool: toolUsed, grammarData });
                 } catch (err) {
@@ -177,66 +207,71 @@ export async function POST(req: Request) {
         }
         // 5. Sanskrit Validation (if message contains Devanagari)
         else if (/[\u0900-\u097F]/.test(message)) {
-            toolUsed = "send_sanskrit_message";
-            const result: any = await mcpClient.callTool("send_sanskrit_message", {
-                fromAgent: "user",
-                toAgent: "sanskrit_bot",
-                content: message,
-                context: "user chat",
-                formality: "formal"
-            });
+            toolUsed = "validate_grammar";
 
-            // Extract text from MCP response
-            let msgText = "";
-            if (Array.isArray(result) && result[0]?.text) {
-                msgText = result[0].text;
-            } else if (result?.content && Array.isArray(result.content) && result.content[0]?.text) {
-                msgText = result.content[0].text;
-            } else if (typeof result === "string") {
-                msgText = result;
-            } else {
-                msgText = JSON.stringify(result, null, 2);
+            try {
+                const result: any = await mcpClient.callTool("validate_grammar", {
+                    text: message
+                });
+
+                // Extract JSON from MCP response
+                let jsonText = "";
+                if (Array.isArray(result) && result[0]?.text) {
+                    jsonText = result[0].text;
+                } else if (result?.content && Array.isArray(result.content) && result.content[0]?.text) {
+                    jsonText = result.content[0].text;
+                } else if (typeof result === "string") {
+                    jsonText = result;
+                }
+
+                let grammarData: any = {};
+                try {
+                    grammarData = JSON.parse(jsonText);
+                } catch (e) {
+                    console.error("Failed to parse validation JSON:", e);
+                    responseText = "Error analyzing text: Invalid response format.";
+                }
+
+                if (grammarData) {
+                    // Construct friendly text response
+                    responseText = `Analysis for: ${message}\n`;
+                    responseText += grammarData.is_valid ? "✅ Grammatically Valid\n" : "⚠️ Issues Detected\n";
+
+                    if (grammarData.suggestions && grammarData.suggestions.length > 0) {
+                        // Filter out raw graph/tree dumps from text suggestions if any
+                        const textSuggestions = grammarData.suggestions.filter((s: string) => !s.startsWith("Compound") && !s.startsWith("Morphology"));
+                        if (textSuggestions.length > 0) {
+                            responseText += "\n" + textSuggestions.join("\n");
+                        }
+                    }
+
+                    // Map to UI GrammarData format
+                    // UI expects: { sentence, breakdown: [...] }
+                    grammarData.sentence = message;
+
+                    // Create breakdown from morphology tree if available
+                    if (grammarData.morphology_tree) {
+                        grammarData.breakdown = grammarData.morphology_tree.map((node: any) => ({
+                            original_text: node.label,
+                            split_form: node.children?.[0]?.label || node.label, // Stem
+                            meaning: node.children?.[0]?.details || "", // Root meaning
+                            category: node.details?.toLowerCase().includes("noun") ? "noun" :
+                                node.details?.toLowerCase().includes("verb") ? "verb" : "other",
+                            details: node.children?.[1]?.label || "" // Suffix
+                        }));
+                    } else {
+                        // Fallback breakdown
+                        grammarData.breakdown = [];
+                    }
+                }
+
+                return NextResponse.json({ response: responseText, tool: toolUsed, grammarData });
+
+            } catch (error) {
+                console.error("Validation Tool Error:", error);
+                responseText = "Error communicating with validation engine.";
+                return NextResponse.json({ response: responseText, tool: toolUsed });
             }
-            responseText = msgText;
-
-            // Construct Grammar Data for Visualization
-            // In a real scenario, we would parse the MCP response more robustly or ask MCP for structured data.
-            // Here we simulate it based on the input for demonstration if the MCP doesn't return structured data yet.
-
-            // Naive word splitter for demo
-            const words = message.split(/\s+/).map((w: string) => ({
-                text: w,
-                transliteration: "..." // Placeholder, ideally from MCP
-            }));
-
-            // Extract grammar info from responseText if possible, or mock for visualization demo
-            // The MCP returns text like "Grammar patterns detected: ... Sandhi: ..."
-
-            // For the "analyze" tool, we already parsed the JSON above.
-            // For this fallback/auto-detect path, we might not have the detailed JSON unless we ask for it.
-            // To keep it simple and consistent, let's try to construct a basic breakdown from the regex matches we had before,
-            // OR just rely on the "analyze" tool for the rich visualization.
-
-            // Let's map the old regex-based extraction to the new structure for consistency if the user didn't explicitly ask "analyze"
-            // but we still want to show something.
-
-            const sandhiMatch = responseText.match(/Sandhi: (.*?)\n/);
-            const samasaMatch = responseText.match(/Samāsa: (.*?)\n/);
-            const vibhaktiMatch = responseText.match(/Vibhakti: (.*?)\n/);
-
-            // This is a fallback approximation
-            const grammarData = {
-                sentence: message,
-                breakdown: words.map((w: any) => ({
-                    original_text: w.text,
-                    split_form: w.text,
-                    meaning: "...",
-                    category: "other",
-                    details: "Detected via MCP"
-                }))
-            };
-
-            return NextResponse.json({ response: responseText, tool: toolUsed, grammarData });
         }
         // 6. Fallback: General Query via Gemini Direct
         else {

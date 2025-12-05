@@ -57,6 +57,43 @@ python -m sanskrit_mcp
 export GEMINI_API_KEY="your-api-key-here"
 ```
 
+## 🌐 Sanskrit.io Setup (Web Access)
+
+Turn your local MCP server into a web-accessible "Sanskrit.io" service that can be used by any MCP client (Claude Desktop, Gemini, etc.) over the network.
+
+### 1. Run the SSE Server
+
+The project includes a Starlette-based SSE (Server-Sent Events) server.
+
+```bash
+# Run locally on port 8000
+uvicorn sanskrit_mcp.sse:starlette_app --host 0.0.0.0 --port 8000 --reload
+```
+
+Your server is now available at:
+- **SSE Endpoint**: `http://localhost:8000/sse`
+- **Messages Endpoint**: `http://localhost:8000/messages`
+
+### 2. Connect with Claude Desktop
+
+To use this with Claude Desktop, you can use a proxy or configure it directly if supported. For now, the easiest way is to use `mcp-proxy` or similar tools, or simply use the stdio mode for local usage.
+
+However, if you are building a custom client or using a web-based MCP client, simply point it to the SSE URL above.
+
+### 3. Deploy with Docker
+
+You can easily deploy this to any cloud provider (Render, Railway, AWS, etc.) using the included Dockerfile.
+
+```bash
+# Build the image
+docker build -t sanskrit-mcp .
+
+# Run the container
+docker run -p 8000:8000 sanskrit-mcp
+```
+
+Once deployed, your public URL (e.g., `https://sanskrit-io.onrender.com/sse`) can be used to access the server from anywhere.
+
 ## 🚀 Quick Start Guide
 
 ### 1. Run the MCP Server

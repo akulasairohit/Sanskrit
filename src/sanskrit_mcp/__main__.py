@@ -27,6 +27,10 @@ from .lib.gemini_client import GeminiClient
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
 # Initialize core services
 agent_registry = AgentRegistry()
 sanskrit_validator = SanskritValidator()
@@ -173,21 +177,24 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
             return await handle_query_vedic_knowledge(arguments)
         elif name == "validate_grammar":
             text = arguments["text"]
-            mode = arguments.get("mode", "morphology")
             
             try:
-                # Attempt to use sanskrit_parser if available
-                from sanskrit_parser.base.sanskrit_base import SanskritObject, SLP1
-                from sanskrit_parser.parser.sandhi_analyzer import LexicalSandhiAnalyzer
+                # Use our internal SanskritValidator
+                result = await sanskrit_validator.validate_text(text)
                 
-                # This is a simplified usage. In a real scenario, we'd initialize the analyzer properly.
-                # Since data files might be missing, we wrap this in a try-except.
-                return [TextContent(type="text", text=f"Analysis for '{text}':\n[Rule Engine Integration Pending: Please ensure sanskrit-parser data is installed]\n\nValidating structure... OK.")]
+                # Convert result to JSON
+                import json
+                from dataclasses import asdict
                 
-            except ImportError:
-                return [TextContent(type="text", text="Error: 'sanskrit-parser' library not found. Please install it to enable strict Paninian validation.")]
+                # Helper to handle enum serialization if needed, though asdict usually handles basic types.
+                # We might need a custom encoder if we have complex objects, but our types are simple enough.
+                result_dict = asdict(result)
+                
+                return [TextContent(type="text", text=json.dumps(result_dict, default=str))]
+                
             except Exception as e:
-                return [TextContent(type="text", text=f"Rule Engine Validation:\nText: {text}\nStatus: Structure Validated (Basic)\nNote: Full morphological analysis requires local data files.\nError: {str(e)}")]
+                logger.error(f"Validation error: {e}", exc_info=True)
+                return [TextContent(type="text", text=f'{{"error": "{str(e)}"}}')]
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
     except Exception as e:

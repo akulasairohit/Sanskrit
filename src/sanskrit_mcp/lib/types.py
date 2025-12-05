@@ -114,6 +114,8 @@ class ValidationResult:
     suggestions: list[ValidationSuggestion] = field(default_factory=list)
     confidence: float = 1.0
     grammar_patterns: Optional[GrammarPatterns] = None
+    semantic_graph: Optional[dict[str, Any]] = None
+    morphology_tree: Optional[list[dict[str, Any]]] = None
 
 
 @dataclass

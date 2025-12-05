@@ -517,6 +517,14 @@ ic texts."""
             key = keyword.lower()
             self.indexed_keywords[key].append(passage)
 
+        # Auto-index words from content
+        content_text = f"{passage.transliteration} {passage.translation} {passage.reference.text}"
+        content_keywords = self._extract_keywords(content_text)
+        
+        for key in content_keywords:
+            if passage not in self.indexed_keywords[key]:
+                self.indexed_keywords[key].append(passage)
+
     def _build_concept_graph(self) -> None:
         """Build concept relationships graph."""
         self.concept_graph = {
@@ -589,9 +597,12 @@ ic texts."""
             "and",
             "or",
         }
+        import re
+        # Remove punctuation and split
+        clean_text = re.sub(r'[^\w\s]', '', query.lower())
         return [
             word
-            for word in query.lower().split()
+            for word in clean_text.split()
             if word not in common_words and len(word) > 2
         ]
 

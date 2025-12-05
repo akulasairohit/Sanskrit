@@ -1,0 +1,22 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+set ip "49.13.237.226"
+set password "Sanskrit_Ruhrpott_2025!"
+set script "setup_server.sh"
+
+# 1. Copy setup script
+spawn scp -o StrictHostKeyChecking=no $script root@$ip:/root/
+expect {
+    "password:" { send "$password\r" }
+    timeout { puts "Timeout waiting for password"; exit 1 }
+}
+expect eof
+
+# 2. Run setup script
+spawn ssh -o StrictHostKeyChecking=no root@$ip "chmod +x /root/$script && /root/$script"
+expect {
+    "password:" { send "$password\r" }
+    timeout { puts "Timeout waiting for password"; exit 1 }
+}
+expect eof
