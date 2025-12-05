@@ -101,3 +101,10 @@ dist/
 *_DEBATE_*.md
 *.summary.md
 *.analysis.md
+
+# Deployment & Ops
+*.tar.gz
+ops/scripts/*.exp
+test_output.json
+translation_test.json
+
